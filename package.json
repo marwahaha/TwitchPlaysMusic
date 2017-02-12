@@ -1,5 +1,5 @@
 {
-  "name": "twitchplaysthecarillon",
+  "name": "twitchplaysmusic",
   "description": "Generate sheet music in MuseScore from Twitch chat, like TwitchPlaysPokemon",
   "version": "0.0.1",
   "dependencies": {
@@ -12,6 +12,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/marwahaha/TwitchPlaysTheCarillon.git"
+    "url": "https://github.com/marwahaha/TwitchPlaysMusic"
   }
 }

@@ -34,10 +34,11 @@ function generateSheetMusic() {
     for (var i = 0; i < currentNotes.length; i++) {
         currentNotes[i][1] -= (now  - config.sheetMusicGenerationTime);
     }
-    console.log(`currentNotes: ${currentNotes.join(".")}`);
+    python_command = 'python ./app/generate_sheet_music.py' + ' ' + config.sheetMusicGenerationTime + ' ' + currentNotes.join(".")
+    console.log(python_command);
 
     // WARNING: Shell metacharacters may interrupt execution of this program...
-    exec('python ./app/generate_sheet_music.py' + ' ' + config.sheetMusicGenerationTime + ' ' + currentNotes.join("."), (error, stdout, stderr) => {
+    exec(python_command, (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
             return;
