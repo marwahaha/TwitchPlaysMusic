@@ -1,6 +1,6 @@
 {
-  "name": "TwitchPlaysX",
-  "description": "Lets you use IRC to send inputs to a program and stream it, TwitchPlaysPokemon style",
+  "name": "twitchplaysthecarillon",
+  "description": "Generate sheet music in MuseScore from Twitch chat, like TwitchPlaysPokemon",
   "version": "0.0.1",
   "dependencies": {
     "irc": "martynsmith/node-irc#605555e3dfe5eb92070f4520a22cedfbebd4dca8",
@@ -12,6 +12,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hzoo/TwitchPlaysX.git"
+    "url": "https://github.com/marwahaha/TwitchPlaysTheCarillon.git"
   }
 }

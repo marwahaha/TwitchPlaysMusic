@@ -48,4 +48,5 @@ client.addListener('error', function(message) {
 });
 
 client.connect();
+setInterval(keyHandler.generateSheetMusic, config.sheetMusicGenerationTime);
 console.log('Connecting...');

@@ -1,5 +1,6 @@
 var exec = require('child_process').exec,
 config = require('./config.js'),
+currentNotes = [],
 lastTime = {},
 throttledCommands = config.throttledCommands,
 regexThrottle = new RegExp('^(' + throttledCommands.join('|') + ')$', 'i'),
@@ -23,16 +24,29 @@ function sendKey(command) {
             }
         }
         if (allowKey) {
-            exec('python ./app/key.py' + ' ' + command, (error, stdout, stderr) => {
-                if (error) {
-                    console.error(`exec error: ${error}`);
-                    return;
-                }
-                console.log(`stdout: ${stdout}`);
-                console.log(`stderr: ${stderr}`);
-            });
+            currentNotes.push([command, new Date().getTime()]);
         }
     }
 }
 
+function generateSheetMusic() {
+    var now = new Date().getTime();
+    for (var i = 0; i < currentNotes.length; i++) {
+        currentNotes[i][1] -= (now  - config.sheetMusicGenerationTime);
+    }
+    console.log(`currentNotes: ${currentNotes.join(".")}`);
+
+    // WARNING: Shell metacharacters may interrupt execution of this program...
+    exec('python ./app/generate_sheet_music.py' + ' ' + config.sheetMusicGenerationTime + ' ' + currentNotes.join("."), (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
+    });
+    currentNotes = [];
+}
+
 exports.sendKey = sendKey;
+exports.generateSheetMusic = generateSheetMusic;
