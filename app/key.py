@@ -1,31 +1,25 @@
-#http://stackoverflow.com/questions/1823762/sendkeys-for-python-3-1-on-windows
-
-import win32api
-import win32con
-import win32ui
 import time,sys
+from music21 import *
+score_generation_speed = 5      # not using yet
+lastNoteTime = 0               # not using yet
+s = stream.Stream()
+print("HELLO")
 
-keyDelay = 0.1
-keymap = {
-    "Up": win32con.VK_UP,
-    "Left": win32con.VK_LEFT,
-    "Down": win32con.VK_DOWN,
-    "Right": win32con.VK_RIGHT,
-    "b": ord("B"),
-    "a": ord("A"),
-    "y": ord("Y"), #for NDS
-    "x": ord("X"), #for NDS
-    "s": ord("S"), #start
-    "e": ord("E") #select
-}
+def add_note_to_stream(note_name):
+    # replace flat sign "b" with "-" (musescore convention)
+    if (len(note_name) > 1 and note_name[1] == "b"):
+        note_name[1] = "-"
 
-def sendKey(button):
-    win32api.keybd_event(keymap[button], 0, 0, 0)
-    time.sleep(keyDelay)
-    win32api.keybd_event(keymap[button], 0, win32con.KEYEVENTF_KEYUP, 0)
+    currentTime = time.time()
+    # Initialize if this has never been called...
+    lastNoteTime = currentTime - 1
+
+    n = note.Note(note_name)
+    n.quarterLength = currentTime - lastNoteTime
+    print n.quarterLength
+    lastNoteTime = currentTime
+    s.append(note.Note(note_name))
+    s.show()
 
 if __name__ == "__main__":
-    win = win32ui.FindWindow(None, sys.argv[1])
-    win.SetForegroundWindow()
-    win.SetFocus()
-    sendKey(sys.argv[2])
+    add_note_to_stream(sys.argv[1])

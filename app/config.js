@@ -1,12 +1,8 @@
 var nconf = require('nconf').argv().env().file({ file:'config.json' });
 
 // List of commands to check for
-var commands = [
-    'left', 'right', 'up', 'down',
-    'start', 'select',
-    'a', 'b',
-    'democracy', 'anarchy'
-];
+var commands = [];
+var regexCommands = /^[A-G][b#-]?[1-7]?$/i;
 
 var username = process.env.TWITCH_USERNAME || nconf.get('TWITCH_USERNAME');
 var oauth = process.env.TWITCH_OAUTH || nconf.get('TWITCH_OAUTH');
@@ -62,6 +58,7 @@ var ircConfig = {
     delay: 100,
 
     sendKey: sendKey,
+    regexCommands: regexCommands,
     commands: commands
 };
 
