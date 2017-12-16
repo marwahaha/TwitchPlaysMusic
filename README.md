@@ -1,4 +1,4 @@
-#Twitch Plays Music#
+# Twitch Plays Music
 
 (inspired by [TwitchPlaysPokemon] and made with [TwitchPlaysX])
 
@@ -19,7 +19,7 @@ npm install
 Setup
 --------------
 
-###Create config.json###
+### Create config.json
 Create a config.json file  in the root directory of this project.
 To get your Oauth token, go to http://www.twitchapps.com/tmi.
 
@@ -43,7 +43,9 @@ The config options are used in the [config.js](/app/config.js) file.
 }
 ```
 
-##Running It!##
+Running It!
+--------------
+
 ```sh
 # go to the root folder, make sure you did `npm install`, then
 npm start
